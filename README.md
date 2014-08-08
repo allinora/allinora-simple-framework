@@ -10,7 +10,9 @@ Authors
 
 Credits
 -------
-- [Anant Garg] Inspired from this blog post (http://anantgarg.com/2009/03/13/write-your-own-php-mvc-framework-part-1/)
+- [Anant Garg] Inspired from his blog posts on Writting your own MVC framework
+- http://anantgarg.com/2009/03/13/write-your-own-php-mvc-framework-part-1/
+- http://anantgarg.com/2009/03/30/write-your-own-php-mvc-framework-part-2/
 
 
 License
