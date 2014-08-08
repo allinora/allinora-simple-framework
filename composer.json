@@ -1,0 +1,25 @@
+{
+    "name": "allinora/simple/framework",
+    "type": "library",
+    "description": "Simple framework for web applications.",
+    "keywords": ["allinora", "framework"],
+    "license": "MIT",
+    "authors": [
+    	{
+    		"name": "Atif Ghaffar",
+    		"email": "atif.ghaffar@gmail.com",
+    		"homepage": "http://atifghaffar.ch/"
+    	},
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "require-dev": {
+        "smarty/smarty":              "@stable"
+    },
+    "autoload": {
+    	"psr-4": {
+    		"Allinora\\Simple\\": "src"
+    	}
+    }
+}
