@@ -9,7 +9,7 @@
     		"name": "Atif Ghaffar",
     		"email": "atif.ghaffar@gmail.com",
     		"homepage": "http://atifghaffar.ch/"
-    	},
+    	}
     ],
     "require": {
         "php": ">=5.3.3"
