@@ -8,6 +8,10 @@ Authors
 
 - [Atif ghaffar](http://atif.ghaffar@gmail.com) ([Twitter](http://twitter.com/atifghaffar)) 
 
+Credits
+-------
+- [Anant Garg] Inspired from this blog post (http://anantgarg.com/2009/03/13/write-your-own-php-mvc-framework-part-1/)
+
 
 License
 -------
