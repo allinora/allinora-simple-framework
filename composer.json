@@ -12,10 +12,8 @@
     	}
     ],
     "require": {
-        "php": ">=5.3.3"
-    },
-    "require-dev": {
-        "smarty/smarty":              "@stable"
+        "php": ">=5.3.3",
+        "smarty/smarty": "@stable"
     },
     "autoload": {
     	"psr-4": {
