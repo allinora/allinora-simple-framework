@@ -17,10 +17,9 @@ class Log {
 		
 	}
 	
-	public function log($str=""){
-		if (is_string($str)){
+	public function log($str = null){
+		if (!empty($str)){
 			print "Log: $str<br>";
-			//syslog(LOG_WARNING, $str);
 		}
 	}
 }

@@ -17,7 +17,7 @@ class Template {
 	protected $_action;
 
 
-	protected $_wrapper="wrapper";
+	protected $_wrapper = 'wrapper';
 	protected $_wrapperDir;
 	
 
@@ -29,7 +29,7 @@ class Template {
 	protected $helper;
 	
 
-	function init($controller,$action) {
+	function init($controller, $action) {
 		$this->_controller = $controller;
 		$this->_action = $action;
 
@@ -38,18 +38,14 @@ class Template {
 		}
 
 		//automatically load the right template from the app views folder
-		$ctl = ($controller == null || $controller === "") ? "" : ($this->_controller);
-		$_template_file=ROOT . DS . 'application' . DS . 'views' . DS . $ctl . DS . $this->_action . '.html';
+		$ctl = ($controller == null || $controller === '') ? '' : ($this->_controller);
+		$_template_file = ROOT . DS . 'application' . DS . 'views' . DS . $ctl . DS . $this->_action . '.html';
 		if (file_exists($_template_file)){
 			$this->templateFile = $_template_file;
 		}
 	}
 
 	public function __construct () {
-		if (!defined("SMARTY_LIBRARY")) {
-			define("SMARTY_LIBRARY", ROOT . "/library/3rdparty/smarty/Smarty-3.0.8/libs/Smarty.class.php");
-		}
-		
 		$this->helper=new Helper();
 		
 		if (!defined("SMARTY_TEMPLATE_DIR")) {
@@ -83,19 +79,18 @@ class Template {
 
 		// YOUR smarty plugins directory. This will be added to the list of smarty plugins
 		if (!defined('SMARTY_LOCAL_PLUGINS_DIR')){
-			define('SMARTY_LOCAL_PLUGINS_DIR', ROOT.DS."application" .DS. "helpers".DS."smarty-plugins");
+			define('SMARTY_LOCAL_PLUGINS_DIR', ROOT . DS . 'application' . DS . 'helpers' . DS . 'smarty-plugins');
 		}
 	
 		
-		//include_once(SMARTY_LIBRARY);
 		$this->smarty = new \Smarty();
 		
 		//useful vars for plugins like media
-		$this->smarty->assign("DEVELOPMENT_ENVIRONMENT", DEVELOPMENT_ENVIRONMENT);
+		$this->smarty->assign('DEVELOPMENT_ENVIRONMENT', DEVELOPMENT_ENVIRONMENT);
 
 		// Define the language
-		if (defined("LANG")){
-			$this->smarty->assign("lang", LANG);
+		if (defined('LANG')){
+			$this->smarty->assign('lang', LANG);
 		}
 
 		// Supress notices.
@@ -139,35 +134,35 @@ class Template {
 
 	/** Display Template **/
     public function setWrapper($wrapper){
-            $this->_wrapper=$wrapper;
+            $this->_wrapper = $wrapper;
     }
     public function setWrapperDir($x){
-            $this->_wrapperDir=$x;
+            $this->_wrapperDir = $x;
     }
 	public function setTemplateFile($file){
-		$this->templateFile=$file;
+		$this->templateFile = $file;
 	}
-	public function getContents($noWrapper=0){
-		$res="";
-		$content=$this->smarty->fetch($this->templateFile);
+	public function getContents($noWrapper = 0){
+		$res = '';
+		$content = $this->smarty->fetch($this->templateFile);
 		if ($noWrapper) {
-			$res=$content;
+			$res = $content;
 		} else {
 			if ($this->_wrapperDir){
-				$wrapper=$this->_wrapperDir . "/" . $this->_wrapper  . ".html";
+				$wrapper = $this->_wrapperDir . DS . $this->_wrapper  . '.html';
 			} else {
-				$wrapper=$this->smarty->template_dir . "/" . $this->_wrapper  . ".html";
+				$wrapper = $this->smarty->template_dir . DS . $this->_wrapper  . '.html';
 			}
 			$this->smarty->clearCache($wrapper);
-			$this->set("content", $content);
+			$this->set('content', $content);
 			$res=$this->smarty->fetch($wrapper);
 		}
 		return $res;
 		
 	}
 	
-	public function render ($noWrapper=0) {
-		$res=$this->getContents($noWrapper);
+	public function render ($noWrapper = 0) {
+		$res = $this->getContents($noWrapper);
 		print $res;
 	}
 	public function fetch () {

@@ -86,7 +86,6 @@ final class Framework {
 		
 		
 		$this->url = $url;
-		//print "Framework Constructor called<br>\n";
 
 		$this->setReporting();
 		$this->removeMagicQuotes();
@@ -107,12 +106,12 @@ final class Framework {
 			error_reporting(E_ERROR);
 			ini_set('display_errors','On');
 			ini_set('log_errors', 'On');
-			ini_set('error_log', ROOT.DS.'tmp'.DS.'logs'.DS.'error.log');
+			ini_set('error_log', ROOT . DS . 'tmp' . DS . 'logs' . DS . 'error.log');
 		} else {
 			error_reporting(E_ERROR);
 			ini_set('display_errors','Off');
 			ini_set('log_errors', 'Off');
-			ini_set('error_log', ROOT.DS.'tmp'.DS.'logs'.DS.'error.log');
+			ini_set('error_log', ROOT . DS . 'tmp' . DS . 'logs' . DS . 'error.log');
 		}
 	}
 
@@ -122,21 +121,21 @@ final class Framework {
 	*/
 
 	function setLanguage () {
-		if (!defined("LANGUAGES")){
-			define("LANGUAGES", "en");
+		if (!defined('LANGUAGES')){
+			define('LANGUAGES', 'en');
 		}	
 		$this->i18nURL();
-		if (!defined("LANG")){
+		if (!defined('LANG')){
 			if (!$this->lang){
-				$this->lang="en";
+				$this->lang = 'en';
 			}
-			define("LANG", $this->lang);
+			define('LANG', $this->lang);
 		}
 	}
 	function cleanURL(){
 		// Do whatever need to clean the url..
-		$this->url=preg_replace("@^/*@", "", $this->url);
-		$this->url=preg_replace("@/*$@", "", $this->url);
+		$this->url=preg_replace("@^/*@", '', $this->url);
+		$this->url=preg_replace("@/*$@", '', $this->url);
 
 	}
 
@@ -280,18 +279,18 @@ final class Framework {
 	}
 
 	function getRoutes(){
-		$routing_file=ROOT . DS . 'config' . DS . 'routing.php';
-		$ret=array();
+		$routing_file = ROOT . DS . 'config' . DS . 'routing.php';
+		$ret = array();
 		if (file_exists($routing_file)){
 			include_once($routing_file);
-			$router=new Router;
-			$ret["default"]["controller"]=$router->default["controller"];
-			$ret["default"]["action"]=$router->default["action"];
-			$ret["routing"]=$router->routing;
+			$router = new Router;
+			$ret['default']['controller'] = $router->default['controller'];
+			$ret['defaul']['action'] = $router->default['action'];
+			$ret['routing'] = $router->routing;
 		} else {
-			$ret["default"]["controller"]="index";
-			$ret["default"]["action"]="index";
-			$ret["routing"]=array();
+			$ret['default']['controller'] = 'index';
+			$ret['default']['action'] = 'index';
+			$ret['routing'] = array();
 		}
 		return $ret;
 	}

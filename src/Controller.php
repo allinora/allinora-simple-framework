@@ -35,23 +35,23 @@ class Controller  {
 		$this->_template = new Template();
 		$this->_template->init($controller,$action);
 		
-		$this->set("controller", $controller);
-		$this->set("action", $action);
-		$this->set("request", $request);
-		$this->set("ROOT", ROOT);
-		$this->set("TEMPLATES", ROOT . "/templates");
+		$this->set('controller', $controller);
+		$this->set('action', $action);
+		$this->set('request', $request);
+		$this->set('ROOT', ROOT);
+		$this->set('TEMPLATES', ROOT . "/templates");
 		
 		$this->helper = new Helper();
 		$this->logger = new Log();
 		$this->setWrapperDir();
 
 	}
-	function setWrapper($x){
-		$this->_template->setWrapper($x);
+	function setWrapper($file){
+		$this->_template->setWrapper($file);
 	}
 
-	function setWrapperDir($x){
-		$this->_template->setWrapperDir(ROOT . DS . "application" . DS . "views" . DS . $x);
+	function setWrapperDir($dir){
+		$this->_template->setWrapperDir(ROOT . DS . 'application' . DS . 'views' . DS . $dir);
 	}
 	
 	/* 
@@ -80,7 +80,7 @@ class Controller  {
 	
 	/** Secondary Call Function **/
 	function performAction($controller,$action,$queryString = null,$render = 0) {
-		$controllerFile=ROOT . "/application/controllers/$controller" . "controller.php";
+		$controllerFile = ROOT . '/application/controllers/' . $controller . "controller.php";
 		//print "Trying to load $controllerFile<br>";
 		if (file_exists($controllerFile)){
 			//print "File exists<br>";
@@ -89,7 +89,7 @@ class Controller  {
 			throw new Exception("Controller file: $controllerFile does not exists");
 		}
 		$controllerName = ucfirst($controller).'Controller';
-		$actionName=$action . "Action"; // This is done to avoid clash with reserved function names like list();
+		$actionName= $action . 'Action'; // This is done to avoid clash with reserved function names like list();
 		if (class_exists($controllerName)){
 			
 		} else {
@@ -97,7 +97,7 @@ class Controller  {
 		}
 
 		//print "Trying to load $controllerName<br>"; 
-		$dispatch = new $controllerName($controller,$action);
+		$dispatch = new $controllerName($controller, $action);
 		$dispatch->render = $render;
 		$dispatch->$actionName($queryString);
 
@@ -142,7 +142,7 @@ class Controller  {
 
 	// Override the default template
 	function setTemplateFile($file){
-		$this->_template->setTemplateFile(ROOT . DS . "application" . DS . "views" . DS . $file);
+		$this->_template->setTemplateFile(ROOT . DS . 'application' . DS . 'views' . DS . $file);
 		
 	}
 
@@ -165,15 +165,15 @@ class Controller  {
 
 	function afterAction(){
 		if (isset($this->packages)){
-			$this->set("packages", $this->packages);
+			$this->set('packages', $this->packages);
 		}
 	}
 
-	function http_post_request($url,$params,$http_params=array()) {
+	function http_post_request($url, $params, $http_params=array()) {
 		return $this->http_request($url,'POST', $params, $http_params);
 	}
 
-	function http_get_request($url,$params,$http_params=array()) {
+	function http_get_request($url, $params, $http_params=array()) {
 		return $this->http_request($url,'GET', $params, $http_params);
 	}
 	
@@ -225,13 +225,13 @@ class Controller  {
 	}
 	
 	function clearSession(){
-		(unset)$_SESSION["token"];
+		(unset)$_SESSION['token'];
 		$_SESSION = array();
 	}
 	
-	function getParam($x){
-		if(isset($_REQUEST[$x])){
-			return $_REQUEST[$x];
+	function getParam($key){
+		if(isset($_REQUEST[$key])){
+			return $_REQUEST[$key];
 		}
 	}		
 }
