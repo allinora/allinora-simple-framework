@@ -40,6 +40,35 @@ function syslog($str){
 # End of functions
 
 
+# Autoload for controllers
+function framework_class_loader($className) {
+	if (class_exists($className)){
+		return;
+	}
+
+	if (file_exists(ROOT . DS . 'application' . DS . 'controllers' . DS . strtolower($className) . '.php')) {
+		require_once(ROOT . DS . 'application' . DS . 'controllers' . DS . strtolower($className) . '.php');
+	} else {
+		/* Error Generation Code Here */
+	}
+	return false;
+}
+
+
+spl_autoload_register('Allinora\Simple\framework_class_loader');
+
+// Check various settings before loading everything
+
+if (!defined('ROOT')){
+	if (isset($_SERVER['SCRIPT_FILENAME'])){
+		$project_root = realpath(dirname($_SERVER['SCRIPT_FILENAME']) . "/../");
+		define('ROOT', $project_root);
+	} else {
+		die("Please define a constant called ROOT that should point to the root of your project directory");
+	}
+}
+
+
 // This is final class. It cannot be extended by a subclass.
 final class Framework {
 
@@ -49,6 +78,13 @@ final class Framework {
 
 
 	function __construct($url){
+		$config_file = ROOT . DS . 'config' . 	DS . 'config.php';
+		
+		if (file_exists($config_file)){
+			require_once($config_file);
+		}
+		
+		
 		$this->url = $url;
 		//print "Framework Constructor called<br>\n";
 

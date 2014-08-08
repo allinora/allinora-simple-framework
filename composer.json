@@ -13,6 +13,7 @@
     ],
     "require": {
         "php": ">=5.3.3",
+		"cocur/slugify" : "@stable",
         "smarty/smarty": "@stable"
     },
     "autoload": {
